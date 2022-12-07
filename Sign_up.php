@@ -197,24 +197,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       <div class="col-lg-8 d-flex align-items-center reservation-form-bg">
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" role="form" class="php-email-form" >
           <div class="row gy-4">
-            <div class="form-group mt-3">
-              <input type="text" name="username" class="form-control <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $username; ?>" id="username" placeholder="Username" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
-              <span class="invalid-feedback"><?php echo $username_err; ?></span>
-            
+          <div class="form-group mt-3">
+                <input type="text" name="username" class="form-control <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $username; ?>"placeholder="Username">
+                <span class="invalid-feedback"><?php echo $username_err; ?></span>
+        
             </div>
- 
             <div class="form-group mt-3">
-              <input type="email" class="form-control<?php echo (!empty($email_err))? 'is-invalid' : ''; ?> " value="<?php echo $email; ?>" name="email" id="email" placeholder="Email" data-rule="minlen:4" data-msg="Please enter a valid email">
-              
+              <input type="email" class="form-control<?php echo (!empty($email_err))? 'is-invalid' : ''; ?> " value="<?php echo $email; ?>" name="email" id="email" placeholder="Email" >
+              <span class="invalid-feedback"><?php echo $email_err; ?></span>
             </div>
 
           <div class="form-group mt-3">
-            <input type="password" class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $password; ?>" name="password" id="password" placeholder="Password" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
+            <input type="password" class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $password; ?>" name="password" id="password" placeholder="Password">
             <span class="invalid-feedback"><?php echo $password_err; ?></span>
             
           </div>
           <div class="form-group mt-3">
-            <input type="password" class="form-control <?php echo (!empty($confirm_password_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $confirm_password; ?>" name="confirm_password" id="confirm_password" placeholder="Confirm Password" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
+            <input type="password" class="form-control <?php echo (!empty($confirm_password_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $confirm_password; ?>" name="confirm_password" id="confirm_password" placeholder="Confirm Password" >
             <span class="invalid-feedback"><?php echo $confirm_password_err; ?></span>
           
           </div>
