@@ -347,8 +347,6 @@ meta charset="utf-8">
 
   </main><!-- End #main -->
 
-    <p>
-        <a href="reset-password.php" class="btn btn-warning">Reset Your Password</a>
 </body>
 
 </html>
