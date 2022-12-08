@@ -13,7 +13,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 <html lang="en">
 
 <head>
-meta charset="utf-8">
+<meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
   <title>GrossOut!</title>
@@ -45,7 +45,7 @@ meta charset="utf-8">
   <header id="header" class="header fixed-top d-flex align-items-center">
     <div class="container d-flex align-items-center justify-content-between">
 
-      <a href="index.html" class="logo d-flex align-items-center me-auto me-lg-0">
+      <a href="welcome.php" class="logo d-flex align-items-center me-auto me-lg-0">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <!-- <img src="assets/img/logo.png" alt=""> -->
         <h1>GrossOut<span>!</span></h1>
@@ -73,7 +73,7 @@ meta charset="utf-8">
           <h2 data-aos="fade-up">Enjoy Your Healthy<br>Delicious Food<br>Without making it spoiled</h2>
           <p data-aos="fade-up" data-aos-delay="100">Sed autem laudantium dolores. Voluptatem itaque ea consequatur eveniet. Eum quas beatae cumque eum quaerat.</p>
           <div class="d-flex" data-aos="fade-up" data-aos-delay="200">
-            <a href="Sign_up.html" class="btn-book-a-table">Get Started</a>
+            <a href="CRUD/index.php" class="btn-book-a-table">Get Started</a>
             <a href="https://www.youtube.com/watch?v=CK8FrN1gmf0" class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-play-circle"></i><span>Watch Video</span></a>
           </div>
         </div>
