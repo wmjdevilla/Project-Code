@@ -40,13 +40,22 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <style>
         
+      
+
+
+        .fa{
+          color:red;
+        }
         
+        .btn-fa{
+          color:red;
+        }
 
         .wrapper_mon{
             width: 600px;
             margin: 0 auto;
             margin-top: 50px;
-            margin-bottom: 210px;
+           
             
         }
         
@@ -89,14 +98,15 @@
       <nav id="navbar" class="navbar">
     </nav>
   </header>
+  <section id="why-us" class="about">
   
     <div class="wrapper_sun">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
                     <div class="mt-5 mb-3 clearfix">
-                        <h2 class="pull-left">Food Expiration Tracker</h2>
-                        <a href="create.php" class="btn btn-secondary pull-right"><i class="fa fa-plus"></i> Add New Food</a>
+                        <h3 class="pull-left">Food Expiration Tracker !</h3>
+                        <a href="create.php" class="btn btn-danger pull-right"><i class="fa fa-plus"></i> Add New Food</a>
                     </div>
                     <?php
                     // Include config file
@@ -154,15 +164,15 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="mt-5 mb-3 clearfix">
-                        <h3 class="pull-left">Medicine Expiration Tracker</h3>
-                        <a href="create.php" class="btn btn-secondary pull-right"><i class="fa fa-plus"></i> Add New Medicine</a>
+                        <h3 class="pull-left">Medicine Expiration Tracker!</h2>
+                        <a href="createmed.php" class="btn btn-danger pull-right"><i class="fa fa-plus"></i> Add New Medicine</a>
                     </div>
                     <?php
                     // Include config file
                     require_once "config.php";
 
                     // Attempt select query execution
-                    $sql = "SELECT * FROM food";
+                    $sql = "SELECT * FROM medicine";
                     if ($result = $mysqli->query($sql)) {
                         if ($result->num_rows > 0) {
                             echo '<table class="table table-bordered table-striped">';
@@ -179,13 +189,13 @@
                             while ($row = $result->fetch_array()) {
                                 echo "<tr>";
                                 echo "<td>" . $row['id'] . "</td>";
-                                echo "<td>" . $row['foodname'] . "</td>";
-                                echo "<td>" . $row['quantity'] . "</td>";
-                                echo "<td>" . $row['expdate'] . "</td>";
+                                echo "<td>" . $row['medname'] . "</td>";
+                                echo "<td>" . $row['medquantity'] . "</td>";
+                                echo "<td>" . $row['medexpdate'] . "</td>";
                                 echo "<td>";
-                                echo '<a href="read.php?id=' . $row['id'] . '" class="mr-3" title="View Record" data-toggle="tooltip"><span class="fa fa-eye"></span></a>';
-                                echo '<a href="update.php?id=' . $row['id'] . '" class="mr-3" title="Update Record" data-toggle="tooltip"><span class="fa fa-pencil"></span></a>';
-                                echo '<a href="delete.php?id=' . $row['id'] . '" title="Delete Record" data-toggle="tooltip"><span class="fa fa-trash"></span></a>';
+                                echo '<a href="medread.php?id=' . $row['id'] . '" class="mr-3" title="View Record" data-toggle="tooltip"><span class="fa fa-eye"></span></a>';
+                                echo '<a href="medupdate.php?id=' . $row['id'] . '" class="mr-3" title="Update Record" data-toggle="tooltip"><span class="fa fa-pencil"></span></a>';
+                                echo '<a href="meddelete.php?id=' . $row['id'] . '" title="Delete Record" data-toggle="tooltip"><span class="fa fa-trash"></span></a>';
                                 echo "</td>";
                                 echo "</tr>";
                             }
@@ -208,6 +218,7 @@
         </div>
     </div>
 
+    </section>
     <footer id="footer" class="footer">
 
 <div class="container">

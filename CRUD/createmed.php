@@ -3,52 +3,60 @@
 require_once "config.php";
 
 // Define variables and initialize with empty values
-$foodname = $address = $salary = "";
-$foodname_err = $address_err = $salary_err = "";
+$medname = $medquantity = $medexpdate  ="";
+$medname_err = $medquantity_err = $medexpdate_err = "";
 
 // Processing form data when form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Validate name
-    $input_name = trim($_POST["name"]);
-    if (empty($input_name)) {
-        $name_err = "Please enter a name.";
-    } elseif (!filter_var($input_name, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => "/^[a-zA-Z\s]+$/")))) {
-        $name_err = "Please enter a valid name.";
+    $input_medname = trim($_POST["medname"]);
+    if (empty($input_medname)) {
+        $medname_err = "Please enter food name.";
     } else {
-        $name = $input_name;
+        $medname = $input_medname;
     }
 
     // Validate address
-    $input_address = trim($_POST["address"]);
-    if (empty($input_address)) {
-        $address_err = "Please enter an address.";
-    } else {
-        $address = $input_address;
-    }
+     // Validate salary
+     $input_medquantity = trim($_POST["medquantity"]);
+     if (empty($input_medquantity)) {
+         $medquantity_err = "Please enter the medquantity";
+     } elseif (!ctype_digit($input_medquantity)) {
+         $medquantity_err = "Please enter the right medquantity";
+     } else {
+         $medquantity = $input_medquantity;
+     }
 
-    // Validate salary
-    $input_salary = trim($_POST["salary"]);
-    if (empty($input_salary)) {
-        $salary_err = "Please enter the salary amount.";
-    } elseif (!ctype_digit($input_salary)) {
-        $salary_err = "Please enter a positive integer value.";
-    } else {
-        $salary = $input_salary;
-    }
+     //validate Date 
+     $input_medexpdate = $_POST["medexpdate"];
+     if($input_medexpdate != ''){
+        $medexpdate = $input_medexpdate;
+     }else{
+        $medexpdate_err = "Please select the right expiration date.";
+     }
 
+     
+     
+    
+   
+
+    
+    
+
+    // check it: 
     // Check input errors before inserting in database
-    if (empty($name_err) && empty($address_err) && empty($salary_err)) {
+    if (empty($medname_err) && empty($medquantity_err) && empty($medexpdate_err)) {
         // Prepare an insert statement
-        $sql = "INSERT INTO sunday (name, address, salary) VALUES (?, ?, ?)";
+        $sql = "INSERT INTO medicine (medname, medquantity, medexpdate) VALUES (?, ?, ?)";
 
         if ($stmt = $mysqli->prepare($sql)) {
             // Bind variables to the prepared statement as parameters
-            $stmt->bind_param("sss", $param_name, $param_address, $param_salary);
+            $stmt->bind_param("sss", $param_medname, $param_medquantity, $param_medexpdate);
 
             // Set parameters
-            $param_name = $name;
-            $param_address = $address;
-            $param_salary = $salary;
+            $param_medname = $medname;
+            $param_medquantity = $medquantity;
+            $param_medexpdate = $medexpdate;
 
             // Attempt to execute the prepared statement
             if ($stmt->execute()) {
@@ -94,19 +102,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                         <div class="form-group">
                             <label>Medicine Name</label>
-                            <input type="text" name="medname" class="form-control <?php echo (!empty($name_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $name; ?>">
-                            <span class="invalid-feedback"><?php echo $name_err; ?></span>
+                            <input type="text" name="medname" class="form-control <?php echo (!empty($medname_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $medname; ?>">
+                            <span class="invalid-feedback"><?php echo $medname_err; ?></span>
                         </div>
                         <div class="form-group">
                             <label>Quantity</label>
-                            <textarea name="medquantity" class="form-control <?php echo (!empty($address_err)) ? 'is-invalid' : ''; ?>"><?php echo $address; ?></textarea>
-                            <span class="invalid-feedback"><?php echo $address_err; ?></span>
+                            <textarea name="medquantity" class="form-control <?php echo (!empty($medquantity_err)) ? 'is-invalid' : ''; ?>"><?php echo $medquantity; ?></textarea>
+                            <span class="invalid-feedback"><?php echo $medquantity_err; ?></span>
                         </div>
                         <div class="form-group">
                             <label>Expiration Date</label>
-                            <input type="date" name="medexpdate" class="form-control">
+                            <input type="date" name="medexpdate" placeholder="date" class="form-control">
                         </div>
-                        <input type="submit" class="btn btn-primary" value="Submit">
+                    
+
+                        <input type="submit" class="btn btn-danger" value="Submit">
                         <a href="index.php" class="btn btn-secondary ml-2">Cancel</a>
                     </form>
                 </div>

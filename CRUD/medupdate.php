@@ -3,53 +3,52 @@
 require_once "config.php";
 
 // Define variables and initialize with empty values
-$foodname = $quantity = $expdate = "";
-$foodname_err = $quantity_err = $expdate_err = "";
+$medname = $medquantity = $medexpdate = "";
+$medname_err = $medquantity_err = $medexpdate_err = "";
 
 // Processing form data when form is submitted
 if (isset($_POST["id"]) && !empty($_POST["id"])) {
     // Get hidden input value
     $id = $_POST["id"];
 
-    // Validate foodname$foodname
-    $input_foodname = trim($_POST["foodname"]);
-    if (empty($input_foodname)) {
-        $foodname_err = "Please enter a foodname.";
-    } elseif (!filter_var($input_foodname, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => "/^[a-zA-Z\s]+$/")))) {
-        $foodname_err = "Please enter a valid foodname.";
+    // Validate medname$medname
+    $input_medname = trim($_POST["medname"]);
+    if (empty($input_medname)) {
+        $medname_err = "Please enter a medicine name.";
+    } elseif (!filter_var($input_medname, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => "/^[a-zA-Z\s]+$/")))) {
+        $medname_err = "Please enter a valid medicine name.";
     } else {
-        $foodname = $input_foodname;
+        $medname = $input_medname;
     }
-
-    // Validate quantity quantity
-    $input_quantity = trim($_POST["quantity"]);
-    if (empty($input_quantity)) {
-        $quantity_err = "Please enter an quantity.";
+   // Validate medquantity medquantity
+    $input_medquantity = trim($_POST["medquantity"]);
+    if (empty($input_medquantity)) {
+        $medquantity_err = "Please enter quantity.";
     } else {
-        $quantity = $input_quantity;
+        $medquantity = $input_medquantity;
     }
 
      //validate Date 
-     $input_expdate = $_POST["expdate"];
-     if($input_expdate != ''){
-        $expdate = $input_expdate;
+     $input_medexpdate = $_POST["medexpdate"];
+     if($input_medexpdate != ''){
+        $medexpdate = $input_medexpdate;
      }else{
-        $expdate_err = "Please select the right expiration date.";
+        $medexpdate_err = "Please select the right expiration date.";
      }
 
     // Check input errors before inserting in database
-    if (empty($foodname_err) && empty($quantity_err) && empty($expdate_err)) {
+    if (empty($medname_err) && empty($medquantity_err) && empty($medexpdate_err)) {
         // Prepare an update statement
-        $sql = "UPDATE food SET foodname=?, quantity=?, expdate=? WHERE id=?";
+        $sql = "UPDATE medicine SET medname=?, medquantity=?, medexpdate=? WHERE id=?";
 
         if ($stmt = $mysqli->prepare($sql)) {
             // Bind variables to the prepared statement as parameters
-            $stmt->bind_param("sssi", $param_foodname, $param_quantity, $param_expdate, $param_id);
+            $stmt->bind_param("sssi", $param_medname, $param_medquantity, $param_medexpdate, $param_id);
 
             // Set parameters
-            $param_foodname = $foodname;
-            $param_quantity = $quantity;
-            $param_expdate = $expdate;
+            $param_medname = $medname;
+            $param_medquantity = $medquantity;
+            $param_medexpdate = $medexpdate;
             $param_id = $id;
 
             // Attempt to execute the prepared statement
@@ -75,7 +74,7 @@ if (isset($_POST["id"]) && !empty($_POST["id"])) {
         $id =  trim($_GET["id"]);
 
         // Prepare a select statement
-        $sql = "SELECT * FROM food WHERE id = ?";
+        $sql = "SELECT * FROM medicine WHERE id = ?";
         if ($stmt = $mysqli->prepare($sql)) {
             // Bind variables to the prepared statement as parameters
             $stmt->bind_param("i", $param_id);
@@ -93,9 +92,9 @@ if (isset($_POST["id"]) && !empty($_POST["id"])) {
                     $row = $result->fetch_array(MYSQLI_ASSOC);
 
                     // Retrieve individual field value
-                    $foodname = $row["foodname"];
-                    $quantity = $row["quantity"];
-                    $expdate = $row["expdate"];
+                    $medname = $row["medname"];
+                    $medquantity = $row["medquantity"];
+                    $medexpdate = $row["medexpdate"];
                 } else {
                     // URL doesn't contain valid id. Redirect to error page
                     header("location: error.php");
@@ -143,19 +142,18 @@ if (isset($_POST["id"]) && !empty($_POST["id"])) {
                     <p>Please edit the input values and submit to update the employee record.</p>
                     <form action="<?php echo htmlspecialchars(basename($_SERVER['REQUEST_URI'])); ?>" method="post">
                     <div class="form-group">
-                            <label>Food Name</label>
-                            <input type="text" name="foodname" class="form-control <?php echo (!empty($foodname_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $foodname; ?>">
-                            <span class="invalid-feedback"><?php echo $foodname_err; ?></span>
+                            <label>Medicine Name</label>
+                            <input type="text" name="medname" class="form-control <?php echo (!empty($medname_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $medname; ?>">
+                            <span class="invalid-feedback"><?php echo $medname_err; ?></span>
                         </div>
                         <div class="form-group">
                             <label>Quantity</label>
-                            <textarea name="quantity" class="form-control <?php echo (!empty($quantity_err)) ? 'is-invalid' : ''; ?>"><?php echo $quantity; ?></textarea>
-                            <span class="invalid-feedback"><?php echo $quantity_err; ?></span>
+                            <textarea name="medquantity" class="form-control <?php echo (!empty($medquantity_err)) ? 'is-invalid' : ''; ?>"><?php echo $medquantity; ?></textarea>
+                            <span class="invalid-feedback"><?php echo $medquantity_err; ?></span>
                         </div>
                         <div class="form-group">
                             <label>Expiration Date</label>
-                            <input type="date" name="expdate" placeholder="date" class="form-control">
-                            
+                            <input type="date" name="medexpdate" placeholder="date" class="form-control">
                         </div>
                 
                         <input type="hidden" name="id" value="<?php echo $id; ?>" />

@@ -3,8 +3,8 @@
 require_once "config.php";
 
 // Define variables and initialize with empty values
-$foodname = $quantity = $expdate = $month = $day = $year ="";
-$foodname_err = $quantity_err = $expdate_err = $month_err = $day_err = $year_err = "";
+$foodname = $quantity = $expdate  ="";
+$foodname_err = $quantity_err = $expdate_err = "";
 
 // Processing form data when form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -27,52 +27,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
          $quantity = $input_quantity;
      }
 
-     // Validate month, day, and year
-     $input_month= (int)($_POST["month"]);
-     $input_day= (int)($_POST["day"]);
-     $input_year= (int)($_POST["year"]);
-
-     
-     
-     if (empty($input_month)) {
-         $month_err = "Please enter the correct number of the month";
-     } elseif (!ctype_digit($input_month)) {
-         $month_err = "Please enter the right date";
-     } else {
-         $month = $input_month;
+     //validate Date 
+     $input_expdate = $_POST["expdate"];
+     if($input_expdate != ''){
+        $expdate = $input_expdate;
+     }else{
+        $expdate_err = "Please select the right expiration date.";
      }
-    if (empty($input_day)) {
-        $day_err = "Please enter the correct number of the day";
-    } elseif (!ctype_digit($input_day)) {
-        $day_err = "Please enter the right date";
-    } else {
-        $day = $input_day;
-    }
-    if (empty($input_year)) {
-        $year_err = "Please enter the correct number of the year";
-    } elseif (!ctype_digit($input_year)) {
-        $year_err = "Please enter the right date";
-    } else {
-        $year = $input_year;
-    }
 
-    $validate = checkdate($input_month, $input_day, $input_year);
-    if($validate){
-        $valid = $year.'-'.$month.'-'.$day;
-    }
-    else{
-        $month_err = "Please enter the right date";
-        $day_err = "Please enter the correct number of the day";
-        $year_err = "Please enter the right date";
-    }
+     
+     
     
-    $expdate = $valid;
    
 
     
     
 
-    // check it: 
+
     // Check input errors before inserting in database
     if (empty($foodname_err) && empty($quantity_err) && empty($expdate_err)) {
         // Prepare an insert statement
@@ -136,22 +107,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         </div>
                         <div class="form-group">
                             <label>Quantity</label>
-                            <textarea name="quantity" class="form-control <?php echo (!empty($quantity_err)) ? 'is-invalid' : ''; ?>"><?php echo $quantity; ?></textarea>
+                            <input name="quantity" class="form-control <?php echo (!empty($quantity_err)) ? 'is-invalid' : ''; ?>"><?php echo $quantity; ?></input>
                             <span class="invalid-feedback"><?php echo $quantity_err; ?></span>
                         </div>
                         <div class="form-group">
                             <label>Expiration Date</label>
-                            <input type="text" name="month" placeholder="Month" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <input type="text" name="day" placeholder="Day" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <input type="text" name="year" placeholder="Year" class="form-control"><br /><br />
+                            <input type="date" name="expdate" placeholder="date" class="form-control">
                         </div>
                     
 
-                        <input type="submit" class="btn btn-primary" value="Submit">
+                        <input type="submit" class="btn btn-danger" value="Submit">
                         <a href="index.php" class="btn btn-secondary ml-2">Cancel</a>
                     </form>
                 </div>
