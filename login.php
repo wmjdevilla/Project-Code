@@ -243,7 +243,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           <!-- You can delete the links only if you purchased the pro version. -->
           <!-- Licensing information: https://bootstrapmade.com/license/ -->
           <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/yummy-bootstrap-restaurant-website-template/ -->
-          Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+          Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> <br>
+          Developed by J.T. Bulaybulay, G.R. Campillos, W.M.J. De Villa, A.F. Palillo <br>
+          in Compliance to NCP3106: Software Design Laboratory <br>
+          Mentored by Asst. Prof. Engr. Errol John Antonio
         </div>
       </div>
   
