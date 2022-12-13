@@ -94,9 +94,11 @@
         <!-- <img src="assets/img/logo.png" alt=""> -->
         <h1>GrossOut<span>!</span></h1>
       </a>
+
+      <a class="btn-book-a-table" href="../welcome.php">Home</a>
       </div>
-      <nav id="navbar" class="navbar">
-    </nav>
+          
+      
   </header>
   <section id="why-us" class="about">
   
@@ -111,9 +113,11 @@
                     <?php
                     // Include config file
                     require_once "config.php";
+                    session_start();
 
-                    // Attempt select query execution
-                    $sql = "SELECT * FROM food";
+                     
+                   
+                    $sql = "SELECT * FROM food ORDER BY expdate";
                     if ($result = $mysqli->query($sql)) {
                         if ($result->num_rows > 0) {
                             echo '<table class="table table-bordered table-striped">';
@@ -171,8 +175,9 @@
                     // Include config file
                     require_once "config.php";
 
+
                     // Attempt select query execution
-                    $sql = "SELECT * FROM medicine";
+                    $sql = "SELECT * FROM medicine ORDER BY medexpdate";
                     if ($result = $mysqli->query($sql)) {
                         if ($result->num_rows > 0) {
                             echo '<table class="table table-bordered table-striped">';
@@ -209,7 +214,8 @@
                     } else {
                         echo "Oops! Something went wrong. Please try again later.";
                     }
-
+                  
+                
                     // Close connection
                     $mysqli->close();
                     ?>
