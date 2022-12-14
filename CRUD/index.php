@@ -1,3 +1,5 @@
+<?php $date = date('Y-m-d');?>   
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -93,6 +95,7 @@
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <!-- <img src="assets/img/logo.png" alt=""> -->
         <h1>GrossOut<span>!</span></h1>
+        
       </a>
 
       <a class="btn-book-a-table" href="../welcome.php">Home</a>
@@ -100,23 +103,22 @@
           
       
   </header>
-  <section id="why-us" class="about">
   
+  <section id="why-us" class="about">
     <div class="wrapper_sun">
         <div class="container-fluid">
-            <div class="row">
+            <div class="row">                 
+            <h3>Current Date: <?php echo $date?></h3>
                 <div class="col-md-12">
                     <div class="mt-5 mb-3 clearfix">
                         <h3 class="pull-left">Food Expiration Tracker !</h3>
                         <a href="create.php" class="btn btn-danger pull-right"><i class="fa fa-plus"></i> Add New Food</a>
                     </div>
+
                     <?php
                     // Include config file
                     require_once "config.php";
                     session_start();
-
-                     
-                   
                     $sql = "SELECT * FROM food ORDER BY expdate";
                     if ($result = $mysqli->query($sql)) {
                         if ($result->num_rows > 0) {
@@ -158,6 +160,8 @@
                     // Close connection
                     
                     ?>
+
+
                 </div>
             </div>
         </div>
@@ -218,7 +222,7 @@
                 
                     // Close connection
                     $mysqli->close();
-                    ?>
+                   ?>                  
                 </div>
             </div>
         </div>
@@ -314,6 +318,4 @@
 
 
 </body>
-
-
 </html>
