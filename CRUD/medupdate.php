@@ -41,7 +41,7 @@ if (isset($_POST["id"]) && !empty($_POST["id"])) {
 
         if ($stmt = $mysqli->prepare($sql)) {
             // Bind variables to the prepared statement as parameters
-            $stmt->bind_param("sss", $param_medname, $param_medquantity, $param_medexpdate, $param_idmed);
+            $stmt->bind_param("sssi", $param_medname, $param_medquantity, $param_medexpdate, $param_idmed);
 
             // Set parameters
             $param_medname = $medname;
@@ -137,7 +137,7 @@ if (isset($_POST["id"]) && !empty($_POST["id"])) {
             <div class="row">
                 <div class="col-md-12">
                     <h2 class="mt-5">Update Record</h2>
-                    <p>Please edit the input values and submit to update the employee record.</p>
+                    <p>Please edit the medicine/s listed and submit to update the medicine record.</p>
                     <form action="<?php echo htmlspecialchars(basename($_SERVER['REQUEST_URI'])); ?>" method="post">
                     <div class="form-group">
                             <label>Medicine Name</label>

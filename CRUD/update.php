@@ -42,12 +42,12 @@ if (isset($_POST["id"]) && !empty($_POST["id"])) {
 
         if ($stmt = $mysqli->prepare($sql)) {
             // Bind variables to the prepared statement as parameters
-            $stmt->bind_param("sss", $param_foodname, $param_quantity, $param_expdate, $param_idfood);
+            $stmt->bind_param("sssi", $param_foodname, $param_quantity, $param_expdate, $param_idfood);
 
             // Set parameters
             $param_foodname = $foodname;
             $param_quantity = $quantity;
-            $param_expdate = $expdate;
+            $param_expdate =  $expdate;
             $param_idfood = $id;
 
             // Attempt to execute the prepared statement
@@ -138,7 +138,7 @@ if (isset($_POST["id"]) && !empty($_POST["id"])) {
             <div class="row">
                 <div class="col-md-12">
                     <h2 class="mt-5">Update Record</h2>
-                    <p>Please edit the input values and submit to update the employee record.</p>
+                    <p>Please edit the food/s listed and submit to update the food record.</p>
                     <form action="<?php echo htmlspecialchars(basename($_SERVER['REQUEST_URI'])); ?>" method="post">
                     <div class="form-group">
                             <label>Food Name</label>
