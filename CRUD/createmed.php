@@ -16,8 +16,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $medname = $input_medname;
     }
 
-    // Validate address
-     // Validate salary
+    
+     //Quantity
      $input_medquantity = trim($_POST["medquantity"]);
      if (empty($input_medquantity)) {
          $medquantity_err = "Please enter the medquantity";
@@ -107,7 +107,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         </div>
                         <div class="form-group">
                             <label>Quantity</label>
-                            <textarea name="medquantity" class="form-control <?php echo (!empty($medquantity_err)) ? 'is-invalid' : ''; ?>"><?php echo $medquantity; ?></textarea>
+                            <input name="medquantity" class="form-control <?php echo (!empty($medquantity_err)) ? 'is-invalid' : ''; ?>"><?php echo $medquantity; ?></textarea>
                             <span class="invalid-feedback"><?php echo $medquantity_err; ?></span>
                         </div>
                         <div class="form-group">

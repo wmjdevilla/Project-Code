@@ -35,22 +35,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $expdate = $input_expdate;
      }else{
         $expdate_err = "Please select the right expiration date.";
-     } 
+     }
+
      
     // Check input errors before inserting in database
     if (empty($foodname_err) && empty($quantity_err) && empty($expdate_err)) {
         // Prepare an insert statement
-        $sql = "INSERT INTO food (foodname, quantity, usedDays, status, expdate) VALUES (?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO food (foodname, quantity, expdate) VALUES (?, ?, ?)";
 
         if ($stmt = $mysqli->prepare($sql)) {
             // Bind variables to the prepared statement as parameters
-            $stmt->bind_param("sss", $param_foodname, $param_quantity, $param_usedDays, $param_status, $param_expdate);
+            $stmt->bind_param("sss", $param_foodname, $param_quantity, $param_expdate);
 
             // Set parameters
             $param_foodname = $foodname;
             $param_quantity = $quantity;
-            $param_usedDays = $usedDays;
-            $param_status = $status;
             $param_expdate = $expdate;
 
             // Attempt to execute the prepared statement

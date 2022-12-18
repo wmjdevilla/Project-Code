@@ -42,13 +42,13 @@ if (isset($_POST["id"]) && !empty($_POST["id"])) {
 
         if ($stmt = $mysqli->prepare($sql)) {
             // Bind variables to the prepared statement as parameters
-            $stmt->bind_param("sssi", $param_foodname, $param_quantity, $param_expdate, $param_id);
+            $stmt->bind_param("sss", $param_foodname, $param_quantity, $param_expdate, $param_idfood);
 
             // Set parameters
             $param_foodname = $foodname;
             $param_quantity = $quantity;
             $param_expdate = $expdate;
-            $param_id = $id;
+            $param_idfood = $id;
 
             // Attempt to execute the prepared statement
             if ($stmt->execute()) {

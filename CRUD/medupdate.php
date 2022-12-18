@@ -41,13 +41,13 @@ if (isset($_POST["id"]) && !empty($_POST["id"])) {
 
         if ($stmt = $mysqli->prepare($sql)) {
             // Bind variables to the prepared statement as parameters
-            $stmt->bind_param("sssi", $param_medname, $param_medquantity, $param_medexpdate, $param_id);
+            $stmt->bind_param("sss", $param_medname, $param_medquantity, $param_medexpdate, $param_idmed);
 
             // Set parameters
             $param_medname = $medname;
             $param_medquantity = $medquantity;
             $param_medexpdate = $medexpdate;
-            $param_id = $id;
+            $param_idmed = $id;
 
             // Attempt to execute the prepared statement
             if ($stmt->execute()) {

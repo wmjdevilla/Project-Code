@@ -56,7 +56,7 @@
         }
 
         .wrapper_mon{
-            width: 800px;
+            width: 1000px;
             margin: 0 auto;
             margin-top: 50px;
            
@@ -74,7 +74,7 @@
         background: rgba(206, 18, 18, 0.8);
 }
         .wrapper_sun{
-            width: 800px;
+            width: 1000px;
             margin: 0 auto;
             margin-top: 100px;
         }
@@ -140,7 +140,8 @@
                             echo "</thead>";
                             echo "<tbody>";
                             while ($row = $result->fetch_array()) {
- 
+
+                                $conn1 = new mysqli("localhost","root","","user");
                                 echo "<tr>";
                                 echo "<td>" . $row['id'] . "</td>";
                                 echo "<td>" . $row['foodname'] . "</td>";
@@ -149,25 +150,22 @@
                                          $date = $row['expdate'];
                                          $thisDate = date("Y-m-d");
                                          $status = $row['status'];
-                                         $usedDays = round(abs(strtotime($thisDate)-strtotime($date))/60/60/24);
+                                         $usedDays = round((strtotime($date)-strtotime($thisDate))/60/60/24);
                                          if($usedDays<=0)
                                         {
-                                            $conn->query("update food set status='Expired' where id='".$row['id']."'");
                                             $usedDays;
-                                        }
-                                        else if ($usedDays<=7){
-                                            $conn->query("update food set status='Expiring Later' where id='".$row['id']."'");
-                                            $usedDays;
-
+                                            $conn1->query("update food set status='Expired' where id='".$row['id']."'");
                                         }
                                         else if ($usedDays<=30){
-                                            $conn->query("update food set status='Expiring Soon' where id='".$row['id']."'");
+                                            
                                             $usedDays;
+                                            $conn1->query("update food set status='Expiring' where id='".$row['id']."'");
 
                                         }
                                         else
                                         {
                                             $usedDays;
+                                            $conn1->query("update food set status='Good Condition' where id='".$row['id']."'");
                                         }
 
                                 echo "<td>" . $usedDays . "</td>";
@@ -235,6 +233,8 @@
                             echo "</thead>";
                             echo "<tbody>";
                             while ($row = $result->fetch_array()) {
+
+                                $conn2 = new mysqli("localhost","root","","user");
                                 echo "<tr>";
                                 echo "<td>" . $row['id'] . "</td>";
                                 echo "<td>" . $row['medname'] . "</td>";
@@ -242,29 +242,25 @@
 
                                 $date = $row['medexpdate'];
                                 $thisDate = date("Y-m-d");
-                                $usedDays = round(abs(strtotime($thisDate)-strtotime($date))/60/60/24);
-                                if($usedDays==0)
+                                $status1 = $row['status1'];
+                                $usedDays = round((strtotime($date)-strtotime($thisDate))/60/60/24);
+                              if($usedDays<=0)
                                {
-                                   $conn->query("update medicine set status='Expired' where id='".$id."'");
                                    $usedDays;
-                               }
-                               else if ($usedDays<=7){
-                                   $conn->query("update medicine set status='Expiring Later' where id='".$id."'");
-                                   $usedDays;
-
+                                   $conn2->query("update medicine set status1='Expired' where id='".$row['id']."'");
                                }
                                else if ($usedDays<=30){
-                                   $conn->query("update medicine set status='Expiring Soon' where id='".$id."'");
                                    $usedDays;
-
+                                   $conn2->query("update medicine set status1='Expiring' where id='".$row['id']."'");
                                }
-                               else
+                               else if ($usedDays>30)
                                {
                                    $usedDays;
+                                   $conn2->query("update medicine set status1='Good Condition' where id='".$row['id']."'");
                                }
 
                                 echo "<td>" . $usedDays . "</td>";
-                                echo "<td>" . $status . "</td>";
+                                echo "<td>" . $status1 . "</td>";
 
                                 echo "<td>" . $row['medexpdate'] . "</td>";
                                 echo "<td>";
