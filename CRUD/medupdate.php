@@ -15,8 +15,6 @@ if (isset($_POST["id"]) && !empty($_POST["id"])) {
     $input_medname = trim($_POST["medname"]);
     if (empty($input_medname)) {
         $medname_err = "Please enter a medicine name.";
-    } elseif (!filter_var($input_medname, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => "/^[a-zA-Z\s]+$/")))) {
-        $medname_err = "Please enter a valid medicine name.";
     } else {
         $medname = $input_medname;
     }

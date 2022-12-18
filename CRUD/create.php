@@ -3,8 +3,9 @@
 require_once "config.php";
 
 // Define variables and initialize with empty values
-$foodname = $quantity = $expdate  ="";
+$foodname = $quantity = $expdate  = $usedDays = $status="" ;
 $foodname_err = $quantity_err = $expdate_err = "";
+
 
 // Processing form data when form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -16,8 +17,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $foodname = $input_foodname;
     }
 
-    // Validate address
-     // Validate salary
+   
+     // Quantity
      $input_quantity = trim($_POST["quantity"]);
      if (empty($input_quantity)) {
          $quantity_err = "Please enter the quantity";
@@ -28,34 +29,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
      }
 
      //validate Date 
+     $thisDate = date("Y-m-d");
      $input_expdate = $_POST["expdate"];
      if($input_expdate != ''){
         $expdate = $input_expdate;
      }else{
         $expdate_err = "Please select the right expiration date.";
-     }
-
+     } 
      
-     
-    
-   
-
-    
-    
-
-
     // Check input errors before inserting in database
     if (empty($foodname_err) && empty($quantity_err) && empty($expdate_err)) {
         // Prepare an insert statement
-        $sql = "INSERT INTO food (foodname, quantity, expdate) VALUES (?, ?, ?)";
+        $sql = "INSERT INTO food (foodname, quantity, usedDays, status, expdate) VALUES (?, ?, ?, ?, ?)";
 
         if ($stmt = $mysqli->prepare($sql)) {
             // Bind variables to the prepared statement as parameters
-            $stmt->bind_param("sss", $param_foodname, $param_quantity, $param_expdate);
+            $stmt->bind_param("sss", $param_foodname, $param_quantity, $param_usedDays, $param_status, $param_expdate);
 
             // Set parameters
             $param_foodname = $foodname;
             $param_quantity = $quantity;
+            $param_usedDays = $usedDays;
+            $param_status = $status;
             $param_expdate = $expdate;
 
             // Attempt to execute the prepared statement
@@ -87,7 +82,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <style>
         .wrapper {
             width: 600px;
-            margin: 0 auto;
+            margin: 0 auto; 
         }
     </style>
 </head>

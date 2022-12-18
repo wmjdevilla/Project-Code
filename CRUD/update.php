@@ -15,8 +15,6 @@ if (isset($_POST["id"]) && !empty($_POST["id"])) {
     $input_foodname = trim($_POST["foodname"]);
     if (empty($input_foodname)) {
         $foodname_err = "Please enter a foodname.";
-    } elseif (!filter_var($input_foodname, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => "/^[a-zA-Z\s]+$/")))) {
-        $foodname_err = "Please enter a valid foodname.";
     } else {
         $foodname = $input_foodname;
     }

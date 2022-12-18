@@ -26,6 +26,8 @@ if (isset($_GET["id"]) && !empty(trim($_GET["id"]))) {
                 // Retrieve individual field value
                 $foodname = $row["foodname"];
                 $quantity = $row["quantity"];
+                $useDays = $row["usedDays"];
+                $status = $row["status"];s
                 $expdate = $row["expdate"];
             } else {
                 // URL doesn't contain valid id parameter. Redirect to error page

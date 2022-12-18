@@ -1,5 +1,7 @@
 <?php $date = date('Y-m-d');?>   
 
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -54,7 +56,7 @@
         }
 
         .wrapper_mon{
-            width: 600px;
+            width: 800px;
             margin: 0 auto;
             margin-top: 50px;
            
@@ -72,7 +74,7 @@
         background: rgba(206, 18, 18, 0.8);
 }
         .wrapper_sun{
-            width: 600px;
+            width: 800px;
             margin: 0 auto;
             margin-top: 100px;
         }
@@ -128,16 +130,25 @@
                             echo "<th>#</th>";
                             echo "<th>Food Name</th>";
                             echo "<th>Quantity</th>";
+
+                            echo "<th>Days Left</th>";
+                            echo "<th>Status</th>";
+
                             echo "<th>Expiration Date</th>";
                             echo "<th>Action</th>";
                             echo "</tr>";
                             echo "</thead>";
                             echo "<tbody>";
                             while ($row = $result->fetch_array()) {
+ 
                                 echo "<tr>";
                                 echo "<td>" . $row['id'] . "</td>";
                                 echo "<td>" . $row['foodname'] . "</td>";
                                 echo "<td>" . $row['quantity'] . "</td>";
+
+                                echo "<td>" . $row['usedDays'] . "</td>";
+                                echo "<td>" . $row['status'] . "</td>";
+
                                 echo "<td>" . $row['expdate'] . "</td>";
                                 echo "<td>";
                                 echo '<a href="read.php?id=' . $row['id'] . '" class="mr-3" title="View Record" data-toggle="tooltip"><span class="fa fa-eye"></span></a>';
@@ -190,6 +201,10 @@
                             echo "<th>#</th>";
                             echo "<th>Medicine Name</th>";
                             echo "<th>Quantity</th>";
+
+                            echo "<th>Days Left</th>";
+                            echo "<th>Status</th>";
+
                             echo "<th>Expiration Date</th>";
                             echo "<th>Action</th>";
                             echo "</tr>";
@@ -200,6 +215,10 @@
                                 echo "<td>" . $row['id'] . "</td>";
                                 echo "<td>" . $row['medname'] . "</td>";
                                 echo "<td>" . $row['medquantity'] . "</td>";
+
+                                echo "<td>" . $row['usedDays'] . "</td>";
+                                echo "<td>" . $row['status'] . "</td>";
+
                                 echo "<td>" . $row['medexpdate'] . "</td>";
                                 echo "<td>";
                                 echo '<a href="medread.php?id=' . $row['id'] . '" class="mr-3" title="View Record" data-toggle="tooltip"><span class="fa fa-eye"></span></a>';
