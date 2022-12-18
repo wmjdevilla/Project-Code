@@ -146,8 +146,32 @@
                                 echo "<td>" . $row['foodname'] . "</td>";
                                 echo "<td>" . $row['quantity'] . "</td>";
 
-                                echo "<td>" . $row['usedDays'] . "</td>";
-                                echo "<td>" . $row['status'] . "</td>";
+                                         $date = $row['expdate'];
+                                         $thisDate = date("Y-m-d");
+                                         $status = $row['status'];
+                                         $usedDays = round(abs(strtotime($thisDate)-strtotime($date))/60/60/24);
+                                         if($usedDays<=0)
+                                        {
+                                            $conn->query("update food set status='Expired' where id='".$row['id']."'");
+                                            $usedDays;
+                                        }
+                                        else if ($usedDays<=7){
+                                            $conn->query("update food set status='Expiring Later' where id='".$row['id']."'");
+                                            $usedDays;
+
+                                        }
+                                        else if ($usedDays<=30){
+                                            $conn->query("update food set status='Expiring Soon' where id='".$row['id']."'");
+                                            $usedDays;
+
+                                        }
+                                        else
+                                        {
+                                            $usedDays;
+                                        }
+
+                                echo "<td>" . $usedDays . "</td>";
+                                echo "<td>" . $status . "</td>";
 
                                 echo "<td>" . $row['expdate'] . "</td>";
                                 echo "<td>";
@@ -216,8 +240,31 @@
                                 echo "<td>" . $row['medname'] . "</td>";
                                 echo "<td>" . $row['medquantity'] . "</td>";
 
-                                echo "<td>" . $row['usedDays'] . "</td>";
-                                echo "<td>" . $row['status'] . "</td>";
+                                $date = $row['medexpdate'];
+                                $thisDate = date("Y-m-d");
+                                $usedDays = round(abs(strtotime($thisDate)-strtotime($date))/60/60/24);
+                                if($usedDays==0)
+                               {
+                                   $conn->query("update medicine set status='Expired' where id='".$id."'");
+                                   $usedDays;
+                               }
+                               else if ($usedDays<=7){
+                                   $conn->query("update medicine set status='Expiring Later' where id='".$id."'");
+                                   $usedDays;
+
+                               }
+                               else if ($usedDays<=30){
+                                   $conn->query("update medicine set status='Expiring Soon' where id='".$id."'");
+                                   $usedDays;
+
+                               }
+                               else
+                               {
+                                   $usedDays;
+                               }
+
+                                echo "<td>" . $usedDays . "</td>";
+                                echo "<td>" . $status . "</td>";
 
                                 echo "<td>" . $row['medexpdate'] . "</td>";
                                 echo "<td>";
